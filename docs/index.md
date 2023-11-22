@@ -1,6 +1,6 @@
 # 机器学习课程
 
-> 在[microsoft/ML-For-Beginners](https://github.com/microsoft/ML-For-Beginners)的基础上，创建了中文在线学习网站
+> 在[microsoft/ML-For-Beginners](https://github.com/microsoft/ML-For-Beginners)的基础上，创建了中文在线学习网站[机器学习 在线教程 ](https://eanyang7.github.io/Machine-Learning/)
 
 12周、26节课
 
@@ -99,7 +99,7 @@
 
 ## 离线访问
 
-您可以使用 [Docsify](https://docsify.js.org/#/) 离线运行此文档。 Fork 这个仓库，并在你的本地机器上[安装 Docsify](https://docsify.js.org/#/quickstart)，并在这个仓库的根文件夹中运行 `docsify serve`。你可以通过 localhost 的 3000 端口访问此文档：`localhost:3000`。
+使用[Material for MkDocs ](https://squidfunk.github.io/mkdocs-material/)进行本地构建
 
 ## PDF 文档
 

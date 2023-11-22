@@ -1,0 +1,1868 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Machine-Learning">
+      
+      
+        <meta name="author" content="Ean Yang">
+      
+      
+        <link rel="canonical" href="https://eanyang7.github.io/Machine-Learning/5-Clustering/1-Visualize/README.zh-cn/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../assignment/">
+      
+      
+      <link rel="icon" href="../../../assets/favicon.jpg">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.10">
+    
+    
+      
+        <title>介绍聚类 - 机器学习 在线教程</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.fad675c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="deep-purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="机器学习 在线教程" class="md-header__button md-logo" aria-label="机器学习 在线教程" data-md-component="logo">
+      
+  <img src="../../../assets/logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            机器学习 在线教程
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              介绍聚类
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="deep-purple"  aria-label="切换为暗黑模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换为暗黑模式" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="red"  aria-label="切换为浅色模式"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="切换为浅色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/EanYang7/Machine-Learning" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    github仓库
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="机器学习 在线教程" class="md-nav__button md-logo" aria-label="机器学习 在线教程" data-md-component="logo">
+      
+  <img src="../../../assets/logo.jpg" alt="logo">
+
+    </a>
+    机器学习 在线教程
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/EanYang7/Machine-Learning" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    github仓库
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    机器学习课程
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../1-Introduction/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    1 Introduction
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../2-Regression/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    2 Regression
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../3-Web-App/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    3 Web App
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../4-Classification/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    4 Classification
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    5 Clustering
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            5 Clustering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clustering models for machine learning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../README.zh-cn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    机器学习中的聚类模型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    1 Visualize
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            1 Visualize
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to clustering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    介绍聚类
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    介绍聚类
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      课前测验
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="课前测验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      介绍
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      聚类入门
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      聚类算法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      练习 - 对你的数据进行聚类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="练习 - 对你的数据进行聚类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      练习 - 数据分布
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀挑战
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      课后测验
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      复习与自学
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      作业
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assignment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Research other visualizations for clustering
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assignment.zh-cn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    研究用于聚类的其他可视化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    
+  
+  
+    <a href="../solution/Julia/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Solution
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../2-K-Means/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    2 K Means
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../6-NLP/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    6 NLP
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../7-TimeSeries/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    7 TimeSeries
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../8-Reinforcement/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    8 Reinforcement
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../9-Real-World/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    9 Real World
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      课前测验
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="课前测验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      介绍
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      聚类入门
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      聚类算法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      练习 - 对你的数据进行聚类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="练习 - 对你的数据进行聚类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      练习 - 数据分布
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀挑战
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      课后测验
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      复习与自学
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      作业
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/EanYang7/Machine-Learning/tree/main/docs/5-Clustering/1-Visualize/README.zh-cn.md" title="编辑此页" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/EanYang7/Machine-Learning/tree/main/docs/5-Clustering/1-Visualize/README.zh-cn.md" title="查看本页的源代码" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"/></svg>
+    </a>
+  
+
+
+<h1 id="_1">介绍聚类<a class="headerlink" href="#_1" title="Permanent link">⚓︎</a></h1>
+<p>聚类是一种无监督学习，它假定数据集未标记或其输入与预定义的输出不匹配。它使用各种算法对未标记的数据进行排序，并根据它在数据中识别的模式提供分组。</p>
+<p><a href="https://youtu.be/ty2advRiWJM" title="No One Like You by PSquare"><img alt="No One Like You by PSquare" src="https://img.youtube.com/vi/ty2advRiWJM/0.jpg" /></a></p>
+<blockquote>
+<p>🎥 点击上面的图片观看视频。当您通过聚类学习机器学习时，请欣赏一些尼日利亚舞厅曲目 - 这是 2014 年 PSquare 上高度评价的歌曲。</p>
+</blockquote>
+<h2 id="_2"><a href="https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/27/">课前测验</a><a class="headerlink" href="#_2" title="Permanent link">⚓︎</a></h2>
+<h3 id="_3">介绍<a class="headerlink" href="#_3" title="Permanent link">⚓︎</a></h3>
+<p><a href="https://link.springer.com/referenceworkentry/10.1007%2F978-0-387-30164-8_124">聚类</a>对于数据探索非常有用。让我们看看它是否有助于发现尼日利亚观众消费音乐的趋势和模式。</p>
+<p>✅花一点时间思考聚类的用途。在现实生活中，每当你有一堆衣服需要整理家人的衣服时，就会发生聚类🧦👕👖🩲. 在数据科学中，聚类用于在尝试分析用户的偏好或确定任何未标记数据集的特征。在某种程度上，聚类有助于理解杂乱的状态，就像是一个袜子抽屉。</p>
+<p><a href="https://youtu.be/esmzYhuFnds" title="Introduction to Clustering"><img alt="Introduction to ML" src="https://img.youtube.com/vi/esmzYhuFnds/0.jpg" /></a></p>
+<blockquote>
+<p>🎥单击上图观看视频：麻省理工学院的 John Guttag 介绍聚类</p>
+</blockquote>
+<p>在专业环境中，聚类可用于确定诸如市场细分之类的事情，例如确定哪些年龄组购买哪些商品。另一个用途是异常检测，可能是从信用卡交易数据集中检测欺诈。或者您可以使用聚类来确定一批医学扫描中的肿瘤。</p>
+<p>✅ 想一想您是如何在银行、电子商务或商业环境中“意外”遇到聚类的。</p>
+<blockquote>
+<p>🎓有趣的是，聚类分析起源于 1930 年代的人类学和心理学领域。你能想象它是如何被使用的吗？</p>
+</blockquote>
+<p>或者，您可以使用它对搜索结果进行分组 - 例如，通过购物链接、图片或评论。当您有一个大型数据集想要减少并且想要对其执行更细粒度的分析时，聚类非常有用，因此该技术可用于在构建其他模型之前了解数据。</p>
+<p>✅一旦你的数据被组织成聚类，你就为它分配一个聚类 ID，这个技术在保护数据集的隐私时很有用；您可以改为通过其聚类 ID 来引用数据点，而不是通过更多的可明显区分的数据。您能想到为什么要引用聚类 ID 而不是聚类的其他元素来识别它的其他原因吗？</p>
+<p>在此<a href="https://docs.microsoft.com/learn/modules/train-evaluate-cluster-models?WT.mc_id=academic-77952-leestott">学习模块中</a>加深您对聚类技术的理解</p>
+<h2 id="_4">聚类入门<a class="headerlink" href="#_4" title="Permanent link">⚓︎</a></h2>
+<p><a href="https://scikit-learn.org/stable/modules/clustering.html">Scikit-learn</a> 提供了大量的方法来执行聚类。您选择的类型将取决于您的用例。根据文档，每种方法都有不同的好处。以下是 Scikit-learn 支持的方法及其适当用例的简化表：</p>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>用例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K-Means</td>
+<td>通用目的，归纳的</td>
+</tr>
+<tr>
+<td>Affinity propagation</td>
+<td>许多，不均匀的聚类，归纳的</td>
+</tr>
+<tr>
+<td>Mean-shift</td>
+<td>许多，不均匀的聚类，归纳的</td>
+</tr>
+<tr>
+<td>Spectral clustering</td>
+<td>少数，甚至聚类，转导的</td>
+</tr>
+<tr>
+<td>Ward hierarchical clustering</td>
+<td>许多，受约束的聚类，转导的</td>
+</tr>
+<tr>
+<td>Agglomerative clustering</td>
+<td>许多，受约束的，非欧几里得距离，转导的</td>
+</tr>
+<tr>
+<td>DBSCAN</td>
+<td>非平面几何，不均匀聚类，转导的</td>
+</tr>
+<tr>
+<td>OPTICS</td>
+<td>不平坦的几何形状，具有可变密度的不均匀聚类，转导的</td>
+</tr>
+<tr>
+<td>Gaussian mixtures</td>
+<td>平面几何，归纳的</td>
+</tr>
+<tr>
+<td>BIRCH</td>
+<td>具有异常值的大型数据集，归纳的</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🎓我们如何创建聚类与我们如何将数据点收集到组中有很大关系。让我们分析一些词汇：</p>
+<p>🎓 <a href="https://wikipedia.org/wiki/Transduction_(machine_learning)">“转导”与“归纳”</a></p>
+<p>转导推理源自观察到的映射到特定测试用例的训练用例。归纳推理源自映射到一般规则的训练案例，然后才应用于测试案例。</p>
+<p>示例：假设您有一个仅部分标记的数据集。有些东西是“记录”，有些是“CD”，有些是空白的。您的工作是为空白提供标签。如果您选择归纳方法，您将训练一个寻找“记录”和“CD”的模型，并将这些标签应用于未标记的数据。这种方法将难以对实际上是“盒式磁带”的东西进行分类。另一方面，转导方法可以更有效地处理这些未知数据，因为它可以将相似的项目组合在一起，然后将标签应用于一个组。在这种情况下，聚类可能反映“圆形音乐事物”和“方形音乐事物”。</p>
+<p>🎓 <a href="https://datascience.stackexchange.com/questions/52260/terminology-flat-geometry-in-the-context-of-clustering">“非平面”与“平面”几何</a></p>
+<p>源自数学术语，非平面与平面几何是指通过“平面”（<a href="https://wikipedia.org/wiki/Euclidean_geometry">欧几里德</a>）或“非平面”（非欧几里得）几何方法测量点之间的距离。</p>
+<p>在此上下文中，“平面”是指欧几里得几何（其中一部分被教导为“平面”几何），而非平面是指非欧几里得几何。几何与机器学习有什么关系？好吧，作为植根于数学的两个领域，必须有一种通用的方法来测量聚类中点之间的距离，并且可以以“平坦”(flat)或“非平坦”(non-flat)的方式完成，具体取决于数据的性质. <a href="https://wikipedia.org/wiki/Euclidean_distance">欧几里得距离</a>测量为两点之间线段的长度。<a href="https://wikipedia.org/wiki/Non-Euclidean_geometry">非欧距离</a>是沿曲线测量的。如果您的可视化数据似乎不存在于平面上，您可能需要使用专门的算法来处理它。</p>
+<p><img alt="Flat vs Nonflat Geometry Infographic" src="../images/flat-nonflat.png" />
+<a href="https://twitter.com/dasani_decoded">Dasani Madipalli </a>作图</p>
+<p>🎓 <a href="https://web.stanford.edu/class/cs345a/slides/12-clustering.pdf">'距离'</a></p>
+<p>聚类由它们的距离矩阵定义，例如点之间的距离。这个距离可以通过几种方式来测量。欧几里得聚类由点值的平均值定义，并包含“质心”或中心点。因此，距离是通过到该质心的距离来测量的。非欧式距离指的是“聚类中心”，即离其他点最近的点。聚类中心又可以用各种方式定义。</p>
+<p>🎓 <a href="https://wikipedia.org/wiki/Constrained_clustering">'约束'</a></p>
+<p><a href="https://web.cs.ucdavis.edu/~davidson/Publications/ICDMTutorial.pdf">约束聚类</a>将“半监督”学习引入到这种无监督方法中。点之间的关系被标记为“无法链接”或“必须链接”，因此对数据集强加了一些规则。</p>
+<p>一个例子：如果一个算法在一批未标记或半标记的数据上不受约束，它产生的聚类质量可能很差。在上面的示例中，聚类可能将“圆形音乐事物”和“方形音乐事物”以及“三角形事物”和“饼干”分组。如果给出一些约束或要遵循的规则（“物品必须由塑料制成”、“物品需要能够产生音乐”），这可以帮助“约束”算法做出更好的选择。</p>
+<p>🎓 '密度'</p>
+<p>“嘈杂”的数据被认为是“密集的”。在检查时，每个聚类中的点之间的距离可能或多或少地密集或“拥挤”，因此需要使用适当的聚类方法分析这些数据。<a href="https://www.kdnuggets.com/2020/02/understanding-density-based-clustering.html">本文</a>演示了使用 K-Means 聚类与 HDBSCAN 算法探索具有不均匀聚类密度的嘈杂数据集之间的区别。</p>
+</blockquote>
+<h2 id="_5">聚类算法<a class="headerlink" href="#_5" title="Permanent link">⚓︎</a></h2>
+<p>有超过 100 种聚类算法，它们的使用取决于手头数据的性质。让我们讨论一些主要的：</p>
+<ul>
+<li><strong>层次聚类</strong>。如果一个对象是根据其与附近对象的接近程度而不是较远对象来分类的，则聚类是根据其成员与其他对象之间的距离来形成的。Scikit-learn 的凝聚聚类是分层的。</li>
+</ul>
+<p><img alt="Hierarchical clustering Infographic" src="../images/hierarchical.png" /></p>
+<blockquote>
+<p><a href="https://twitter.com/dasani_decoded">Dasani Madipalli</a> 作图</p>
+</blockquote>
+<ul>
+<li><strong>质心聚类</strong>。这种流行的算法需要选择“k”或要形成的聚类数量，然后算法确定聚类的中心点并围绕该点收集数据。<a href="https://wikipedia.org/wiki/K-means_clustering">K-means 聚类</a>是质心聚类的流行版本。中心由最近的平均值确定，因此叫做质心。与聚类的平方距离被最小化。</li>
+</ul>
+<p><img alt="Centroid clustering Infographic" src="../images/centroid.png" /></p>
+<blockquote>
+<p><a href="https://twitter.com/dasani_decoded">Dasani Madipalli</a> 作图</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>基于分布的聚类</strong>。基于统计建模，基于分布的聚类中心确定一个数据点属于一个聚类的概率，并相应地分配它。高斯混合方法属于这种类型。</p>
+</li>
+<li>
+<p><strong>基于密度的聚类</strong>。数据点根据它们的密度或它们彼此的分组分配给聚类。远离该组的数据点被视为异常值或噪声。DBSCAN、Mean-shift 和 OPTICS 属于此类聚类。</p>
+</li>
+<li>
+<p><strong>基于网格的聚类</strong>。对于多维数据集，创建一个网格并将数据划分到网格的单元格中，从而创建聚类。</p>
+</li>
+</ul>
+<h2 id="-">练习 - 对你的数据进行聚类<a class="headerlink" href="#-" title="Permanent link">⚓︎</a></h2>
+<p>适当的可视化对聚类作为一种技术有很大帮助，所以让我们从可视化我们的音乐数据开始。这个练习将帮助我们决定我们应该最有效地使用哪种聚类方法来处理这些数据的性质。</p>
+<ol>
+<li>
+<p>打开此文件夹中的 <em>notebook.ipynb</em> 文件。</p>
+</li>
+<li>
+<p>导入 <code>Seaborn</code> 包以获得良好的数据可视化。</p>
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">seaborn</span>
+</code></pre></div>
+</li>
+<li>
+<p>附加来自 <em>nigerian-songs.csv</em> 的歌曲数据。加载包含有关歌曲的一些数据的数据帧。准备好通过导入库和转储数据来探索这些数据：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/nigerian-songs.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<p>检查前几行数据：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>name</th>
+<th>album</th>
+<th>artist</th>
+<th>artist_top_genre</th>
+<th>release_date</th>
+<th>length</th>
+<th>popularity</th>
+<th>danceability</th>
+<th>acousticness</th>
+<th>energy</th>
+<th>instrumentalness</th>
+<th>liveness</th>
+<th>loudness</th>
+<th>speechiness</th>
+<th>tempo</th>
+<th>time_signature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Sparky</td>
+<td>Mandy &amp; The Jungle</td>
+<td>Cruel Santino</td>
+<td>alternative r&amp;b</td>
+<td>2019</td>
+<td>144000</td>
+<td>48</td>
+<td>0.666</td>
+<td>0.851</td>
+<td>0.42</td>
+<td>0.534</td>
+<td>0.11</td>
+<td>-6.699</td>
+<td>0.0829</td>
+<td>133.015</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>shuga rush</td>
+<td>EVERYTHING YOU HEARD IS TRUE</td>
+<td>Odunsi (The Engine)</td>
+<td>afropop</td>
+<td>2020</td>
+<td>89488</td>
+<td>30</td>
+<td>0.71</td>
+<td>0.0822</td>
+<td>0.683</td>
+<td>0.000169</td>
+<td>0.101</td>
+<td>-5.64</td>
+<td>0.36</td>
+<td>129.993</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LITT!</td>
+<td>LITT!</td>
+<td>AYLØ</td>
+<td>indie r&amp;b</td>
+<td>2018</td>
+<td>207758</td>
+<td>40</td>
+<td>0.836</td>
+<td>0.272</td>
+<td>0.564</td>
+<td>0.000537</td>
+<td>0.11</td>
+<td>-7.127</td>
+<td>0.0424</td>
+<td>130.005</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Confident / Feeling Cool</td>
+<td>Enjoy Your Life</td>
+<td>Lady Donli</td>
+<td>nigerian pop</td>
+<td>2019</td>
+<td>175135</td>
+<td>14</td>
+<td>0.894</td>
+<td>0.798</td>
+<td>0.611</td>
+<td>0.000187</td>
+<td>0.0964</td>
+<td>-4.961</td>
+<td>0.113</td>
+<td>111.087</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>wanted you</td>
+<td>rare.</td>
+<td>Odunsi (The Engine)</td>
+<td>afropop</td>
+<td>2018</td>
+<td>152049</td>
+<td>25</td>
+<td>0.702</td>
+<td>0.116</td>
+<td>0.833</td>
+<td>0.91</td>
+<td>0.348</td>
+<td>-6.044</td>
+<td>0.0447</td>
+<td>105.115</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>获取有关数据帧的一些信息，调用 <code>info()</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div>
+</li>
+</ol>
+<p>输出看起来像这样：</p>
+<div class="highlight"><pre><span></span><code>```output
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 530 entries, 0 to 529
+Data columns (total 16 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   name              530 non-null    object 
+ 1   album             530 non-null    object 
+ 2   artist            530 non-null    object 
+ 3   artist_top_genre  530 non-null    object 
+ 4   release_date      530 non-null    int64  
+ 5   length            530 non-null    int64  
+ 6   popularity        530 non-null    int64  
+ 7   danceability      530 non-null    float64
+ 8   acousticness      530 non-null    float64
+ 9   energy            530 non-null    float64
+ 10  instrumentalness  530 non-null    float64
+ 11  liveness          530 non-null    float64
+ 12  loudness          530 non-null    float64
+ 13  speechiness       530 non-null    float64
+ 14  tempo             530 non-null    float64
+ 15  time_signature    530 non-null    int64  
+dtypes: float64(8), int64(4), object(4)
+memory usage: 66.4+ KB
+```
+</code></pre></div>
+<ol>
+<li>
+<p>通过调用 <code>isnull()</code> 和验证总和为 0 来仔细检查空值：</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</code></pre></div>
+<p>看起来不错：</p>
+<div class="highlight"><pre><span></span><code><span class="go">name                0</span>
+<span class="go">album               0</span>
+<span class="go">artist              0</span>
+<span class="go">artist_top_genre    0</span>
+<span class="go">release_date        0</span>
+<span class="go">length              0</span>
+<span class="go">popularity          0</span>
+<span class="go">danceability        0</span>
+<span class="go">acousticness        0</span>
+<span class="go">energy              0</span>
+<span class="go">instrumentalness    0</span>
+<span class="go">liveness            0</span>
+<span class="go">loudness            0</span>
+<span class="go">speechiness         0</span>
+<span class="go">tempo               0</span>
+<span class="go">time_signature      0</span>
+<span class="go">dtype: int64</span>
+</code></pre></div>
+</li>
+<li>
+<p>描述数据：</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>release_date</th>
+<th>length</th>
+<th>popularity</th>
+<th>danceability</th>
+<th>acousticness</th>
+<th>energy</th>
+<th>instrumentalness</th>
+<th>liveness</th>
+<th>loudness</th>
+<th>speechiness</th>
+<th>tempo</th>
+<th>time_signature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+<td>530</td>
+</tr>
+<tr>
+<td>mean</td>
+<td>2015.390566</td>
+<td>222298.1698</td>
+<td>17.507547</td>
+<td>0.741619</td>
+<td>0.265412</td>
+<td>0.760623</td>
+<td>0.016305</td>
+<td>0.147308</td>
+<td>-4.953011</td>
+<td>0.130748</td>
+<td>116.487864</td>
+<td>3.986792</td>
+</tr>
+<tr>
+<td>std</td>
+<td>3.131688</td>
+<td>39696.82226</td>
+<td>18.992212</td>
+<td>0.117522</td>
+<td>0.208342</td>
+<td>0.148533</td>
+<td>0.090321</td>
+<td>0.123588</td>
+<td>2.464186</td>
+<td>0.092939</td>
+<td>23.518601</td>
+<td>0.333701</td>
+</tr>
+<tr>
+<td>min</td>
+<td>1998</td>
+<td>89488</td>
+<td>0</td>
+<td>0.255</td>
+<td>0.000665</td>
+<td>0.111</td>
+<td>0</td>
+<td>0.0283</td>
+<td>-19.362</td>
+<td>0.0278</td>
+<td>61.695</td>
+<td>3</td>
+</tr>
+<tr>
+<td>25%</td>
+<td>2014</td>
+<td>199305</td>
+<td>0</td>
+<td>0.681</td>
+<td>0.089525</td>
+<td>0.669</td>
+<td>0</td>
+<td>0.07565</td>
+<td>-6.29875</td>
+<td>0.0591</td>
+<td>102.96125</td>
+<td>4</td>
+</tr>
+<tr>
+<td>50%</td>
+<td>2016</td>
+<td>218509</td>
+<td>13</td>
+<td>0.761</td>
+<td>0.2205</td>
+<td>0.7845</td>
+<td>0.000004</td>
+<td>0.1035</td>
+<td>-4.5585</td>
+<td>0.09795</td>
+<td>112.7145</td>
+<td>4</td>
+</tr>
+<tr>
+<td>75%</td>
+<td>2017</td>
+<td>242098.5</td>
+<td>31</td>
+<td>0.8295</td>
+<td>0.403</td>
+<td>0.87575</td>
+<td>0.000234</td>
+<td>0.164</td>
+<td>-3.331</td>
+<td>0.177</td>
+<td>125.03925</td>
+<td>4</td>
+</tr>
+<tr>
+<td>max</td>
+<td>2020</td>
+<td>511738</td>
+<td>73</td>
+<td>0.966</td>
+<td>0.954</td>
+<td>0.995</td>
+<td>0.91</td>
+<td>0.811</td>
+<td>0.582</td>
+<td>0.514</td>
+<td>206.007</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<blockquote>
+<p>🤔如果我们正在使用聚类，一种不需要标记数据的无监督方法，为什么我们用标签显示这些数据？在数据探索阶段，它们派上用场，但它们不是聚类算法工作所必需的。您也可以删除列标题并按列号引用数据。</p>
+</blockquote>
+<p>查看数据的普遍值。请注意，流行度可以是“0”，表示没有排名的歌曲。让我们尽快删除它们。</p>
+<ol>
+<li>
+<p>使用条形图找出最受欢迎的类型：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">top</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;artist_top_genre&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">top</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">top</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Top genres&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="most popular" src="../images/popular.png" /></p>
+</li>
+</ol>
+<p>✅如果您想查看更多顶部值，请将顶部更改<code>[:5]</code>为更大的值，或将其删除以查看全部。</p>
+<p>请注意，当顶级流派被描述为“缺失”时，这意味着 Spotify 没有对其进行分类，所以让我们避免它。</p>
+<ol>
+<li>
+<p>通过过滤掉丢失的数据来避免</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;artist_top_genre&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;Missing&#39;</span><span class="p">]</span>
+<span class="n">top</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;artist_top_genre&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">top</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">top</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Top genres&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>现在重新检查 genres：</p>
+<p><img alt="most popular" src="../images/all-genres.png" /></p>
+</li>
+<li>
+<p>到目前为止，前三大流派主导了这个数据集。让我们专注于 <code>afro dancehall</code>，<code>afropop</code> 和 <code>nigerian pop</code>，另外过滤数据集以删除任何具有 0 流行度值的内容（这意味着它在数据集中没有被归类为流行度并且可以被视为我们的目的的噪音）：</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;artist_top_genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;afro dancehall&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;artist_top_genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;afropop&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;artist_top_genre&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;nigerian pop&#39;</span><span class="p">)]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;popularity&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">top</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;artist_top_genre&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">top</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">top</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Top genres&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>做一个快速测试，看看数据是否以任何特别强的方式相关：</p>
+<div class="highlight"><pre><span></span><code><span class="n">corrmat</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corrmat</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="correlations" src="../images/correlation.png" /></p>
+<blockquote>
+<p>唯一强相关性是 <code>energy</code> 和之间 <code>loudness</code>，这并不奇怪，因为嘈杂的音乐通常非常有活力。否则，相关性相对较弱。看看聚类算法可以如何处理这些数据会很有趣。</p>
+<blockquote>
+<p>🎓请注意，相关性并不意味着因果关系！我们有相关性的证据，但没有因果关系的证据。一个<a href="https://tylervigen.com/spurious-correlations">有趣的网站</a>有一些强调这一点的视觉效果。</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<p>这个数据集是否围绕歌曲的流行度和可舞性有任何收敛？FacetGrid 显示无论流派如何，都有同心圆排列。对于这种类型，尼日利亚人的口味是否会在某种程度的可舞性上趋于一致？</p>
+<p>✅ 尝试不同的数据点（能量、响度、语音）和更多或不同的音乐类型。你能发现什么？查看 <code>df.describe()</code> 表格以了解数据点的一般分布。</p>
+<h3 id="-_1">练习 - 数据分布<a class="headerlink" href="#-_1" title="Permanent link">⚓︎</a></h3>
+<p>这三种流派是否因其受欢迎程度而对其可舞性的看法有显着差异？</p>
+<ol>
+<li>
+<p>检查我们沿给定 x 和 y 轴的流行度和可舞性的前三种类型数据分布。</p>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">)</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;popularity&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;danceability&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;artist_top_genre&quot;</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>您可以发现围绕一般收敛点的同心圆，显示点的分布。</p>
+<blockquote>
+<p>🎓请注意，此示例使用 KDE（核密度估计）图，该图使用连续概率密度曲线表示数据。这允许我们在处理多个分布时解释数据。</p>
+</blockquote>
+<p>总的来说，这三种流派在流行度和可舞性方面松散地对齐。在这种松散对齐的数据中确定聚类将是一个挑战：</p>
+<p><img alt="distribution" src="../images/distribution.png" /></p>
+</li>
+<li>
+<p>创建散点图：</p>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;artist_top_genre&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> \
+   <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">,</span> <span class="s2">&quot;popularity&quot;</span><span class="p">,</span> <span class="s2">&quot;danceability&quot;</span><span class="p">)</span> \
+   <span class="o">.</span><span class="n">add_legend</span><span class="p">()</span>
+</code></pre></div>
+<p>相同轴的散点图显示了类似的收敛模式</p>
+<p><img alt="Facetgrid" src="../images/facetgrid.png" /></p>
+</li>
+</ol>
+<p>一般来说，对于聚类，你可以使用散点图来展示数据的聚类，所以掌握这种类型的可视化是非常有用的。在下一课中，我们将使用过滤后的数据并使用 k-means 聚类来发现这些数据中以有趣方式重叠的组。</p>
+<hr />
+<h2 id="_6">🚀挑战<a class="headerlink" href="#_6" title="Permanent link">⚓︎</a></h2>
+<p>为下一课做准备，制作一张图表，说明您可能会在生产环境中发现和使用的各种聚类算法。</p>
+<p>聚类试图解决什么样的问题？</p>
+<h2 id="_7"><a href="https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/28/">课后测验</a><a class="headerlink" href="#_7" title="Permanent link">⚓︎</a></h2>
+<h2 id="_8">复习与自学<a class="headerlink" href="#_8" title="Permanent link">⚓︎</a></h2>
+<p>在应用聚类算法之前，正如我们所了解的，了解数据集的性质是一个好主意。<a href="https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html">在此处</a>阅读有关此主题的更多<a href="https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html">信息</a></p>
+<p><a href="https://www.freecodecamp.org/news/8-clustering-algorithms-in-machine-learning-that-all-data-scientists-should-know/">这篇有用的文章将</a>引导您了解各种聚类算法在给定不同数据形状的情况下的不同行为方式。</p>
+<h2 id="_9">作业<a class="headerlink" href="#_9" title="Permanent link">⚓︎</a></h2>
+<p><a href="../assignment.zh-cn/">研究用于聚类的其他可视化</a></p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 22, 2023</span>
+      
+        <br>
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 22, 2023</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: Introduction to clustering">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                Introduction to clustering
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../assignment/" class="md-footer__link md-footer__link--next" aria-label="下一页: Research other visualizations for clustering">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                Research other visualizations for clustering
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 Ean Yang
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/YQisme" target="_blank" rel="noopener" title="github主页" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://space.bilibili.com/244185393?spm_id_from=333.788.0.0" target="_blank" rel="noopener" title="b站主页" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M488.6 104.1c16.7 18.1 24.4 39.7 23.3 65.7v202.4c-.4 26.4-9.2 48.1-26.5 65.1-17.2 17-39.1 25.9-65.5 26.7H92.02c-26.45-.8-48.21-9.8-65.28-27.2C9.682 419.4.767 396.5 0 368.2V169.8c.767-26 9.682-47.6 26.74-65.7C43.81 87.75 65.57 78.77 92.02 78h29.38L96.05 52.19c-5.75-5.73-8.63-13-8.63-21.79 0-8.8 2.88-16.06 8.63-21.797C101.8 2.868 109.1 0 117.9 0s16.1 2.868 21.9 8.603L213.1 78h88l74.5-69.397C381.7 2.868 389.2 0 398 0c8.8 0 16.1 2.868 21.9 8.603 5.7 5.737 8.6 12.997 8.6 21.797 0 8.79-2.9 16.06-8.6 21.79L394.6 78h29.3c26.4.77 48 9.75 64.7 26.1zm-38.8 69.7c-.4-9.6-3.7-17.4-10.7-23.5-5.2-6.1-14-9.4-22.7-9.8H96.05c-9.59.4-17.45 3.7-23.58 9.8-6.14 6.1-9.4 13.9-9.78 23.5v194.4c0 9.2 3.26 17 9.78 23.5s14.38 9.8 23.58 9.8H416.4c9.2 0 17-3.3 23.3-9.8 6.3-6.5 9.7-14.3 10.1-23.5V173.8zm-264.3 42.7c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.2 6.3-14 9.5-23.6 9.5-9.6 0-17.5-3.2-23.6-9.5-6.1-6.3-9.4-14-9.8-23.2v-33.3c.4-9.1 3.8-16.9 10.1-23.2 6.3-6.3 13.2-9.6 23.3-10 9.2.4 17 3.7 23.3 10zm191.5 0c6.3 6.3 9.7 14.1 10.1 23.2V273c-.4 9.2-3.7 16.9-9.8 23.2-6.1 6.3-14 9.5-23.6 9.5-9.6 0-17.4-3.2-23.6-9.5-7-6.3-9.4-14-9.7-23.2v-33.3c.3-9.1 3.7-16.9 10-23.2 6.3-6.3 14.1-9.6 23.3-10 9.2.4 17 3.7 23.3 10z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://eanyang7.com" target="_blank" rel="noopener" title="个人主页" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M112 48a48 48 0 1 1 96 0 48 48 0 1 1-96 0zm40 304v128c0 17.7-14.3 32-32 32s-32-14.3-32-32V256.9l-28.6 47.6c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6h29.7c33.7 0 64.9 17.7 82.3 46.6l58.3 97c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9L232 256.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V352h-16z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.prune", "navigation.top", "toc.follow", "header.autohide", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.action.edit", "content.action.view", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c14ae12.min.js"></script>
+      
+    
+  </body>
+</html>

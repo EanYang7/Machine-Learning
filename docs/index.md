@@ -9,6 +9,7 @@
 通过把这些经典的技术应用在来自世界各地的数据，我们将 “环游世界”。每一节课都包括了课前和课后测验、课程内容的文字讲义说明、示例代码、作业等。通过这种基于项目的教学方法，你将在构建中学习，这样可以把技能学得更牢靠。
 
 ---
+
 # 准备开始
 
 [**对于学生们**](https://aka.ms/student-page)，为了更好的使用这套课程，把整个仓库 fork 到你自己的 GitHub 账户中，并自行（或和一个小组一起）完成以下练习：
@@ -31,17 +32,18 @@
 
 
 
-[![ML for beginners banner](./docs/assets/ml-for-beginners-video-banner.png)](https://aka.ms/ml-beginners-videos) 
+[![ML for beginners banner](./assets/ml-for-beginners-video-banner.png)](https://aka.ms/ml-beginners-videos) 
 
 
 
 ## 项目团队
 
-[![宣传视频](./docs/assets/ml.gif)](https://youtu.be/Tj1XWrDSYJU)
+[![宣传视频](./assets/ml.gif)](https://youtu.be/Tj1XWrDSYJU)
 
 > 🎥 点击上面的图片获取关于该项目和创建人员的视频！
 
 ---
+
 ## 教学方式
 
 此课程基于两个教学原则：学生应该上手进行**项目实践**，并完成**频繁的测验**。 此外，为了使整个课程更具有整体性，课程们有一个共同的**主题**。
@@ -94,9 +96,11 @@
 |    24    |             帮助 Peter 避开狼！🐺             | [强化学习](../8-Reinforcement/translations/README.zh-cn.md)  | 强化学习练习                                                 | [课程](../8-Reinforcement/2-Gym/translations/README.zh-cn.md) |
 |   附言   |        现实世界中的机器学习场景和应用        | [自然场景下的机器学习](../9-Real-World/translations/README.zh-cn.md) | 探索有趣的经典机器学习方法，了解现实世界中机器学习的应用     |       [课程](../9-Real-World/1-Applications/README.md)       |
 |   附言   |         使用RAI仪表板在ML中调试模型          | [自然场景下的机器学习](../9-Real-World/translations/README.zh-cn.md) | 使用负责任的AI仪表板组件进行机器学习中的模型调试             |   [课程](../9-Real-World/2-Debugging-ML-Models/README.md)    |
+
 ## 离线访问
 
 您可以使用 [Docsify](https://docsify.js.org/#/) 离线运行此文档。 Fork 这个仓库，并在你的本地机器上[安装 Docsify](https://docsify.js.org/#/quickstart)，并在这个仓库的根文件夹中运行 `docsify serve`。你可以通过 localhost 的 3000 端口访问此文档：`localhost:3000`。
+
 ## PDF 文档
 
 点击[这里](../pdf/readme.pdf)查找课程的 PDF 文档。
